@@ -1,0 +1,26 @@
+import wollok.game.*
+import configuracion.*
+import personajes.*
+
+program juego {
+/*
+ * Las colisiones no se verifican solas, por lo que hay que agregar un bucle para hacerlo constantemente
+ * o verificarlas cada vez que sucede algo (Como al presionar cierta tecla)
+ * 
+ * La velocidad de la verificacion influye si hay visuales moviendose rapido
+ * En este ejemplo la verificacion se hace cada 300ms, si un visual colisiona cuando no se esta realizando
+ * la verificacion, entonces no lo tomara como una colision.
+ */
+	configuracion.init()
+	
+	game.onTick(300, "verificacion de colisiones", {
+		console.println(rojo.enColisionCon(azul)) //Muestra por consola si se esta realizando la colision
+		
+		if(rojo.enColisionCon(azul)){
+			game.say(rojo.objetosEnColision().get(0), "Oh, No!!")		
+		}
+	})
+	
+	game.start()
+
+}
